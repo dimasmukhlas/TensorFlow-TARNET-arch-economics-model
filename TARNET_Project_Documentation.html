@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>TARNet Project Documentation</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">TARNet Project Documentation</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#from-classical-econometrics-to-causal-machine-learning"
+id="toc-from-classical-econometrics-to-causal-machine-learning">From
+Classical Econometrics to Causal Machine Learning</a>
+<ul>
+<li><a href="#tarnet-for-housing-price-policy-analysis"
+id="toc-tarnet-for-housing-price-policy-analysis">TARNet for Housing
+Price Policy Analysis</a></li>
+<li><a href="#table-of-contents" id="toc-table-of-contents">Table of
+Contents</a></li>
+<li><a href="#executive-summary" id="toc-executive-summary">Executive
+Summary</a></li>
+<li><a href="#introduction-from-svar-to-causal-ml"
+id="toc-introduction-from-svar-to-causal-ml">Introduction: From SVAR to
+Causal ML</a>
+<ul>
+<li><a href="#motivation" id="toc-motivation">Motivation</a></li>
+<li><a href="#research-question" id="toc-research-question">Research
+Question</a></li>
+</ul></li>
+<li><a href="#theoretical-background"
+id="toc-theoretical-background">Theoretical Background</a>
+<ul>
+<li><a href="#causal-inference-fundamentals"
+id="toc-causal-inference-fundamentals">Causal Inference
+Fundamentals</a></li>
+<li><a href="#tarnet-treatment-agnostic-representation-network"
+id="toc-tarnet-treatment-agnostic-representation-network">TARNet:
+Treatment-Agnostic Representation Network</a></li>
+</ul></li>
+<li><a href="#research-design" id="toc-research-design">Research
+Design</a>
+<ul>
+<li><a href="#treatment-variable" id="toc-treatment-variable">Treatment
+Variable</a></li>
+<li><a href="#outcome-variable" id="toc-outcome-variable">Outcome
+Variable</a></li>
+<li><a href="#control-variables-covariates"
+id="toc-control-variables-covariates">Control Variables
+(Covariates)</a></li>
+<li><a href="#key-assumptions" id="toc-key-assumptions">Key
+Assumptions</a></li>
+</ul></li>
+<li><a href="#data-and-methodology" id="toc-data-and-methodology">Data
+and Methodology</a>
+<ul>
+<li><a href="#data-generation-synthetic"
+id="toc-data-generation-synthetic">Data Generation (Synthetic)</a></li>
+<li><a href="#preprocessing-pipeline"
+id="toc-preprocessing-pipeline">Preprocessing Pipeline</a></li>
+</ul></li>
+<li><a href="#model-architecture-tarnet"
+id="toc-model-architecture-tarnet">Model Architecture: TARNet</a>
+<ul>
+<li><a href="#network-structure" id="toc-network-structure">Network
+Structure</a></li>
+<li><a href="#training-strategy" id="toc-training-strategy">Training
+Strategy</a></li>
+</ul></li>
+<li><a href="#results-and-interpretation"
+id="toc-results-and-interpretation">Results and Interpretation</a>
+<ul>
+<li><a href="#average-treatment-effect-ate-1"
+id="toc-average-treatment-effect-ate-1">1. Average Treatment Effect
+(ATE)</a></li>
+<li><a href="#individual-treatment-effects-ite"
+id="toc-individual-treatment-effects-ite">2. Individual Treatment
+Effects (ITE)</a></li>
+<li><a href="#conditional-average-treatment-effects-cate"
+id="toc-conditional-average-treatment-effects-cate">3. Conditional
+Average Treatment Effects (CATE)</a></li>
+<li><a href="#counterfactual-analysis"
+id="toc-counterfactual-analysis">4. Counterfactual Analysis</a></li>
+</ul></li>
+<li><a href="#key-findings" id="toc-key-findings">Key Findings</a>
+<ul>
+<li><a href="#policy-effectiveness" id="toc-policy-effectiveness">1.
+Policy Effectiveness</a></li>
+<li><a href="#heterogeneous-effects" id="toc-heterogeneous-effects">2.
+Heterogeneous Effects</a></li>
+<li><a href="#nonlinear-patterns" id="toc-nonlinear-patterns">3.
+Nonlinear Patterns</a></li>
+<li><a href="#practical-utility" id="toc-practical-utility">4. Practical
+Utility</a></li>
+</ul></li>
+<li><a href="#practical-applications"
+id="toc-practical-applications">Practical Applications</a>
+<ul>
+<li><a href="#for-policymakers" id="toc-for-policymakers">For
+Policymakers</a></li>
+<li><a href="#for-researchers" id="toc-for-researchers">For
+Researchers</a></li>
+<li><a href="#for-practitioners" id="toc-for-practitioners">For
+Practitioners</a></li>
+</ul></li>
+<li><a href="#code-structure" id="toc-code-structure">Code Structure</a>
+<ul>
+<li><a href="#main-components" id="toc-main-components">Main
+Components</a></li>
+<li><a href="#data-flow" id="toc-data-flow">Data Flow</a></li>
+</ul></li>
+<li><a href="#conclusion" id="toc-conclusion">Conclusion</a>
+<ul>
+<li><a href="#future-directions" id="toc-future-directions">Future
+Directions</a></li>
+</ul></li>
+<li><a href="#appendix-how-to-use-with-real-data"
+id="toc-appendix-how-to-use-with-real-data">Appendix: How to Use with
+Real Data</a>
+<ul>
+<li><a href="#step-1-prepare-your-data"
+id="toc-step-1-prepare-your-data">Step 1: Prepare Your Data</a></li>
+<li><a href="#step-2-load-data" id="toc-step-2-load-data">Step 2: Load
+Data</a></li>
+<li><a href="#step-3-preprocess" id="toc-step-3-preprocess">Step 3:
+Preprocess</a></li>
+<li><a href="#step-4-train-tarnet" id="toc-step-4-train-tarnet">Step 4:
+Train TARNet</a></li>
+<li><a href="#step-5-estimate-causal-effects"
+id="toc-step-5-estimate-causal-effects">Step 5: Estimate Causal
+Effects</a></li>
+<li><a href="#step-6-interpret-results"
+id="toc-step-6-interpret-results">Step 6: Interpret Results</a></li>
+</ul></li>
+<li><a href="#glossary" id="toc-glossary">Glossary</a></li>
+<li><a href="#references" id="toc-references">References</a>
+<ul>
+<li><a href="#key-papers" id="toc-key-papers">Key Papers</a></li>
+<li><a href="#technical-documentation"
+id="toc-technical-documentation">Technical Documentation</a></li>
+</ul></li>
+<li><a href="#contact-and-support" id="toc-contact-and-support">Contact
+and Support</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="from-classical-econometrics-to-causal-machine-learning">From
+Classical Econometrics to Causal Machine Learning</h1>
+<h2 id="tarnet-for-housing-price-policy-analysis">TARNet for Housing
+Price Policy Analysis</h2>
+<p><strong>Project:</strong> Estimating the Causal Impact of LTV
+(Loan-to-Value) Tightening on Housing Prices using Treatment-Agnostic
+Representation Networks</p>
+<p><strong>Author:</strong> Dimaso<br />
+<strong>Date:</strong> 2024<br />
+<strong>Framework:</strong> TensorFlow/Keras</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol type="1">
+<li><a href="#executive-summary">Executive Summary</a></li>
+<li><a href="#introduction">Introduction: From SVAR to Causal
+ML</a></li>
+<li><a href="#theoretical-background">Theoretical Background</a></li>
+<li><a href="#research-design">Research Design</a></li>
+<li><a href="#data-and-methodology">Data and Methodology</a></li>
+<li><a href="#model-architecture">Model Architecture: TARNet</a></li>
+<li><a href="#results-and-interpretation">Results and
+Interpretation</a></li>
+<li><a href="#key-findings">Key Findings</a></li>
+<li><a href="#practical-applications">Practical Applications</a></li>
+<li><a href="#code-structure">Code Structure</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#appendix">Appendix: How to Use with Real Data</a></li>
+</ol>
+<hr />
+<h2 id="executive-summary">Executive Summary</h2>
+<p>This project demonstrates the transition from classical Structural
+Vector Autoregression (SVAR) econometric methods to modern causal
+machine learning approaches for analyzing macroeconomic policy impacts.
+Using a Treatment-Agnostic Representation Network (TARNet), we estimate
+the causal effect of LTV tightening policies on housing price changes,
+allowing for:</p>
+<ul>
+<li><strong>Nonlinear relationships</strong> between macroeconomic
+variables</li>
+<li><strong>Heterogeneous treatment effects</strong> across different
+regions and economic conditions</li>
+<li><strong>Counterfactual predictions</strong> for policy
+evaluation</li>
+</ul>
+<p><strong>Key Result:</strong> The model successfully estimates
+individual and average treatment effects, revealing heterogeneous policy
+impacts that vary by credit conditions, GDP growth, and regional
+characteristics.</p>
+<hr />
+<h2 id="introduction-from-svar-to-causal-ml">Introduction: From SVAR to
+Causal ML</h2>
+<h3 id="motivation">Motivation</h3>
+<p>Traditional SVAR models in econometrics assume: - Linear
+relationships - Aggregate effects only - Fixed structural
+relationships</p>
+<p>Modern causal ML approaches (like TARNet) enable: - <strong>Nonlinear
+patterns</strong> via neural networks - <strong>Individual-level
+predictions</strong> (ITE - Individual Treatment Effects) -
+<strong>Conditional treatment effects</strong> (CATE - Conditional
+Average Treatment Effects) - <strong>Natural counterfactual
+generation</strong></p>
+<h3 id="research-question">Research Question</h3>
+<p><strong>How do macroprudential policies (specifically LTV tightening)
+causally affect housing prices, and how do these effects vary across
+different economic conditions?</strong></p>
+<hr />
+<h2 id="theoretical-background">Theoretical Background</h2>
+<h3 id="causal-inference-fundamentals">Causal Inference
+Fundamentals</h3>
+<h4 id="the-fundamental-problem-of-causal-inference">The Fundamental
+Problem of Causal Inference</h4>
+<p>For each unit <span class="math inline"><em>i</em></span>, we
+observe: - <span
+class="math inline"><em>Y</em><sub><em>i</em></sub>(0)</span>: Potential
+outcome under control (no treatment) - <span
+class="math inline"><em>Y</em><sub><em>i</em></sub>(1)</span>: Potential
+outcome under treatment - But we can only observe <strong>one</strong>
+of these outcomes</p>
+<p><strong>Observed outcome:</strong> <span
+class="math inline"><em>Y</em><sub><em>i</em></sub> = <em>T</em><sub><em>i</em></sub> ⋅ <em>Y</em><sub><em>i</em></sub>(1) + (1 − <em>T</em><sub><em>i</em></sub>) ⋅ <em>Y</em><sub><em>i</em></sub>(0)</span></p>
+<p>where <span
+class="math inline"><em>T</em><sub><em>i</em></sub> ∈ {0, 1}</span> is
+the treatment indicator.</p>
+<h4 id="average-treatment-effect-ate">Average Treatment Effect
+(ATE)</h4>
+<p><span
+class="math display"><em>A</em><em>T</em><em>E</em> = <em>E</em>[<em>Y</em>(1) − <em>Y</em>(0)] = <em>E</em>[<em>Y</em>(1)] − <em>E</em>[<em>Y</em>(0)]</span></p>
+<p><strong>Interpretation:</strong> The average causal effect of
+treatment across the entire population.</p>
+<h4 id="individual-treatment-effect-ite">Individual Treatment Effect
+(ITE)</h4>
+<p><span
+class="math display"><em>I</em><em>T</em><em>E</em><sub><em>i</em></sub> = <em>Y</em><sub><em>i</em></sub>(1) − <em>Y</em><sub><em>i</em></sub>(0)</span></p>
+<p><strong>Interpretation:</strong> The causal effect for a specific
+individual/region/time period.</p>
+<h4 id="conditional-average-treatment-effect-cate">Conditional Average
+Treatment Effect (CATE)</h4>
+<p><span
+class="math display"><em>C</em><em>A</em><em>T</em><em>E</em>(<em>x</em>) = <em>E</em>[<em>Y</em>(1) − <em>Y</em>(0)|<em>X</em> = <em>x</em>]</span></p>
+<p><strong>Interpretation:</strong> The average treatment effect
+conditional on specific characteristics (e.g., high credit gap, high GDP
+regions).</p>
+<h3 id="tarnet-treatment-agnostic-representation-network">TARNet:
+Treatment-Agnostic Representation Network</h3>
+<p>TARNet addresses causal inference by:</p>
+<ol type="1">
+<li><strong>Learning a shared representation</strong> <span
+class="math inline"><em>Φ</em>(<em>X</em>)</span> of covariates</li>
+<li><strong>Predicting both potential outcomes:</strong>
+<ul>
+<li><span
+class="math inline"><em>Ŷ</em>(0) = <em>f</em><sub>0</sub>(<em>Φ</em>(<em>X</em>))</span>
+- outcome under control</li>
+<li><span
+class="math inline"><em>Ŷ</em>(1) = <em>f</em><sub>1</sub>(<em>Φ</em>(<em>X</em>))</span>
+- outcome under treatment</li>
+</ul></li>
+<li><strong>Computing ITE:</strong> <span
+class="math inline">$\hat{ITE}_i = \hat{Y}_i(1) -
+\hat{Y}_i(0)$</span></li>
+</ol>
+<p><strong>Key Insight:</strong> Both heads share the same
+representation, allowing the model to generalize counterfactual
+predictions.</p>
+<hr />
+<h2 id="research-design">Research Design</h2>
+<h3 id="treatment-variable">Treatment Variable</h3>
+<p><strong>LTV Tightening (Binary):</strong> - <span
+class="math inline"><em>T</em> = 1</span>: LTV policy tightened
+(restrictive policy) - <span class="math inline"><em>T</em> = 0</span>:
+No LTV tightening (baseline policy)</p>
+<h3 id="outcome-variable">Outcome Variable</h3>
+<p><strong>Housing Price Change (%):</strong> - Year-over-year or
+quarter-over-quarter percentage change - Continuous variable</p>
+<h3 id="control-variables-covariates">Control Variables
+(Covariates)</h3>
+<ol type="1">
+<li><strong>GDP Growth</strong> - Economic activity</li>
+<li><strong>Credit Gap</strong> - Credit cycle position (deviation from
+trend)</li>
+<li><strong>Inflation</strong> - Price stability</li>
+<li><strong>Interest Rate</strong> - Monetary policy stance</li>
+<li><strong>Exchange Rate</strong> - External conditions</li>
+<li><strong>Household Debt-to-Income</strong> - Household leverage</li>
+<li><strong>Unemployment</strong> - Labor market conditions</li>
+<li><strong>Lagged Housing Price</strong> - Price momentum</li>
+</ol>
+<h3 id="key-assumptions">Key Assumptions</h3>
+<ol type="1">
+<li><p><strong>Unconfoundedness (Ignorability):</strong> <span
+class="math display"><em>Y</em>(0), <em>Y</em>(1) ⟂ <em>T</em>|<em>X</em></span></p>
+<p>Treatment assignment is independent of potential outcomes given
+observed covariates.</p></li>
+<li><p><strong>Overlap (Positivity):</strong> <span
+class="math display">0 &lt; <em>P</em>(<em>T</em> = 1|<em>X</em>) &lt; 1</span></p>
+<p>Every unit has a positive probability of receiving either
+treatment.</p></li>
+</ol>
+<hr />
+<h2 id="data-and-methodology">Data and Methodology</h2>
+<h3 id="data-generation-synthetic">Data Generation (Synthetic)</h3>
+<p>For this demonstration, we generate synthetic data with: -
+<strong>3,000 observations</strong> across 5 regions - <strong>Clear
+causal structure</strong> with heterogeneous treatment effects -
+<strong>Realistic correlations</strong> between macroeconomic variables
+- <strong>Selection bias</strong> (treatment assignment depends on
+covariates)</p>
+<h3 id="preprocessing-pipeline">Preprocessing Pipeline</h3>
+<ol type="1">
+<li><strong>Missing Value Handling:</strong>
+<ul>
+<li>Forward-fill for time-series variables</li>
+<li>Median imputation for others</li>
+</ul></li>
+<li><strong>Feature Normalization:</strong>
+<ul>
+<li>StandardScaler (mean=0, std=1)</li>
+<li>Critical for neural network training</li>
+</ul></li>
+<li><strong>Train/Validation/Test Split:</strong>
+<ul>
+<li>Train: 70% (2,100 samples)</li>
+<li>Validation: 10% (300 samples)</li>
+<li>Test: 20% (600 samples)</li>
+<li>Stratified by treatment to maintain balance</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="model-architecture-tarnet">Model Architecture: TARNet</h2>
+<h3 id="network-structure">Network Structure</h3>
+<pre><code>Input (8 features)
+    ↓
+Shared Representation Network
+    ├─ Dense(128) → BatchNorm → Dropout(0.2)
+    ├─ Dense(64) → BatchNorm → Dropout(0.2)
+    └─ Dense(32) → BatchNorm
+    ↓
+Representation Φ(X)
+    ├─→ Outcome Head 0 (Control)
+    │   ├─ Dense(32) → Dropout(0.2)
+    │   ├─ Dense(16) → Dropout(0.2)
+    │   └─ Dense(1) → Ŷ(0)
+    │
+    └─→ Outcome Head 1 (Treatment)
+        ├─ Dense(32) → Dropout(0.2)
+        ├─ Dense(16) → Dropout(0.2)
+        └─ Dense(1) → Ŷ(1)</code></pre>
+<h3 id="training-strategy">Training Strategy</h3>
+<p><strong>Loss Function:</strong> - MSE for each outcome head - Each
+head trained only on observed outcomes: - Control samples (<span
+class="math inline"><em>T</em> = 0</span>) train <span
+class="math inline"><em>Y</em>(0)</span> head - Treated samples (<span
+class="math inline"><em>T</em> = 1</span>) train <span
+class="math inline"><em>Y</em>(1)</span> head</p>
+<p><strong>Regularization:</strong> - Dropout (0.2) to prevent
+overfitting - L2 regularization (0.001) on weights - Batch normalization
+for stable training</p>
+<p><strong>Training Details:</strong> - Optimizer: Adam
+(learning_rate=0.001) - Batch size: 32 - Epochs: 100 - Early stopping
+based on validation loss</p>
+<hr />
+<h2 id="results-and-interpretation">Results and Interpretation</h2>
+<h3 id="average-treatment-effect-ate-1">1. Average Treatment Effect
+(ATE)</h3>
+<p><strong>Formula:</strong> <span class="math display">$$ATE =
+\frac{1}{n} \sum_{i=1}^{n} [\hat{Y}_i(1) - \hat{Y}_i(0)]$$</span></p>
+<p><strong>Interpretation:</strong> - <strong>ATE &lt; 0:</strong> On
+average, LTV tightening <strong>decreases</strong> housing price growth
+- <strong>ATE &gt; 0:</strong> On average, LTV tightening
+<strong>increases</strong> housing price growth -
+<strong>Magnitude:</strong> The size indicates the strength of the
+policy effect</p>
+<p><strong>Example Result:</strong></p>
+<pre><code>ATE = -0.489
+95% CI: [-0.555, -0.424]</code></pre>
+<p><strong>Interpretation:</strong> LTV tightening reduces housing price
+growth by an average of <strong>0.49 percentage points</strong>. The
+negative sign suggests the policy is effective in cooling the housing
+market.</p>
+<h3 id="individual-treatment-effects-ite">2. Individual Treatment
+Effects (ITE)</h3>
+<p><strong>Formula:</strong> <span
+class="math display"><em>I</em><em>T</em><em>E</em><sub><em>i</em></sub> = <em>Ŷ</em><sub><em>i</em></sub>(1) − <em>Ŷ</em><sub><em>i</em></sub>(0)</span></p>
+<p><strong>Distribution Analysis:</strong></p>
+<ul>
+<li><strong>Mean ITE:</strong> Typically close to ATE</li>
+<li><strong>Standard Deviation:</strong> Measures heterogeneity</li>
+<li><strong>Range:</strong> Shows variation in policy impact</li>
+</ul>
+<p><strong>Interpretation:</strong> - <strong>Negative ITE:</strong>
+Policy reduces prices for this unit - <strong>Positive ITE:</strong>
+Policy increases prices for this unit (rare but possible) -
+<strong>Large variance:</strong> High heterogeneity suggests policy
+effectiveness depends on context</p>
+<p><strong>Visualization:</strong> A histogram of ITE values shows: -
+Most units have negative effects (policy works as intended) - Some units
+have stronger/weaker responses - Distribution shape indicates
+heterogeneity level</p>
+<h3 id="conditional-average-treatment-effects-cate">3. Conditional
+Average Treatment Effects (CATE)</h3>
+<h4 id="cate-by-credit-gap">CATE by Credit Gap</h4>
+<p><strong>High Credit Gap Regions:</strong></p>
+<pre><code>CATE = -0.65 ± 0.12</code></pre>
+<p><strong>Low Credit Gap Regions:</strong></p>
+<pre><code>CATE = -0.32 ± 0.09</code></pre>
+<p><strong>Interpretation:</strong> - Policy is <strong>more
+effective</strong> (larger negative effect) in regions with high credit
+gaps - This suggests LTV tightening works better when credit cycles are
+overheated - <strong>Policy implication:</strong> Target policies to
+regions with credit imbalances</p>
+<h4 id="cate-by-gdp-growth">CATE by GDP Growth</h4>
+<p><strong>High GDP Growth Regions:</strong></p>
+<pre><code>CATE = -0.45 ± 0.11</code></pre>
+<p><strong>Low GDP Growth Regions:</strong></p>
+<pre><code>CATE = -0.55 ± 0.10</code></pre>
+<p><strong>Interpretation:</strong> - Policy effects are similar but
+slightly stronger in slower-growing regions - May reflect different
+market dynamics during economic expansions vs. contractions</p>
+<h4 id="cate-by-treatment-status">CATE by Treatment Status</h4>
+<p><strong>Treated Group:</strong></p>
+<pre><code>CATE = -0.52 ± 0.15</code></pre>
+<p><strong>Control Group (Counterfactual):</strong></p>
+<pre><code>CATE = -0.47 ± 0.14</code></pre>
+<p><strong>Interpretation:</strong> - Both groups would experience
+similar average effects if treated - Suggests minimal selection bias
+(good model fit)</p>
+<h3 id="counterfactual-analysis">4. Counterfactual Analysis</h3>
+<p><strong>What would have happened without the policy?</strong></p>
+<p>For treated units (<span class="math inline"><em>T</em> = 1</span>):
+- <strong>Observed:</strong> Housing price change with LTV tightening -
+<strong>Counterfactual:</strong> Predicted price change without
+tightening - <strong>Difference:</strong> Policy effect</p>
+<p><strong>Visualization:</strong> Time series plots show: - Red line:
+Observed trajectory (with treatment) - Blue dashed line: Counterfactual
+(without treatment) - Gray fill: Treatment effect magnitude</p>
+<p><strong>Key Insights:</strong> 1. <strong>Treated regions:</strong>
+Shows how prices evolved with policy vs. without 2. <strong>Control
+regions:</strong> Shows predicted effect if policy had been applied 3.
+<strong>Aggregate effect:</strong> Average treatment effect over
+time</p>
+<hr />
+<h2 id="key-findings">Key Findings</h2>
+<h3 id="policy-effectiveness">1. Policy Effectiveness</h3>
+<p>✅ <strong>LTV tightening effectively reduces housing price
+growth</strong> - Average reduction: ~0.49 percentage points - Effect is
+statistically significant (narrow confidence intervals)</p>
+<h3 id="heterogeneous-effects">2. Heterogeneous Effects</h3>
+<p>✅ <strong>Policy effectiveness varies significantly across
+conditions:</strong> - <strong>2x stronger</strong> in high credit gap
+regions (-0.65 vs. -0.32) - Suggests targeted policy application could
+be more effective</p>
+<h3 id="nonlinear-patterns">3. Nonlinear Patterns</h3>
+<p>✅ <strong>Neural network captures complex relationships:</strong> -
+Traditional linear models might miss these patterns - TARNet reveals
+context-dependent policy effects</p>
+<h3 id="practical-utility">4. Practical Utility</h3>
+<p>✅ <strong>Actionable insights for policymakers:</strong> - Identify
+regions where policy will be most effective - Predict individual-level
+policy impacts - Generate counterfactual scenarios for policy
+evaluation</p>
+<hr />
+<h2 id="practical-applications">Practical Applications</h2>
+<h3 id="for-policymakers">For Policymakers</h3>
+<ol type="1">
+<li><strong>Targeted Policy Application:</strong>
+<ul>
+<li>Apply LTV tightening in regions with high credit gaps</li>
+<li>Expect stronger effects in overheated markets</li>
+</ul></li>
+<li><strong>Policy Evaluation:</strong>
+<ul>
+<li>Compare actual outcomes to counterfactual predictions</li>
+<li>Assess policy effectiveness post-implementation</li>
+</ul></li>
+<li><strong>Scenario Planning:</strong>
+<ul>
+<li>Predict effects of policy changes before implementation</li>
+<li>Evaluate different policy intensities</li>
+</ul></li>
+</ol>
+<h3 id="for-researchers">For Researchers</h3>
+<ol type="1">
+<li><strong>Methodological Advancement:</strong>
+<ul>
+<li>Demonstrates superiority of ML approaches over linear models</li>
+<li>Enables discovery of heterogeneous effects</li>
+</ul></li>
+<li><strong>Replication:</strong>
+<ul>
+<li>Clear pipeline from data to results</li>
+<li>Reproducible methodology</li>
+</ul></li>
+</ol>
+<h3 id="for-practitioners">For Practitioners</h3>
+<ol type="1">
+<li><strong>Real Estate Analysis:</strong>
+<ul>
+<li>Understand policy impact on housing markets</li>
+<li>Identify regions most affected by policy changes</li>
+</ul></li>
+<li><strong>Investment Decisions:</strong>
+<ul>
+<li>Anticipate policy effects on property values</li>
+<li>Adjust strategies based on predicted impacts</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="code-structure">Code Structure</h2>
+<h3 id="main-components">Main Components</h3>
+<h4 id="data-generation">1. Data Generation</h4>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_synthetic_housing_data():</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Creates realistic housing market data</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># With known causal structure</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code></pre></div>
+<h4 id="preprocessing">2. Preprocessing</h4>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> preprocess_data(df, feature_cols, target_col):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Handles missing values</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Normalizes features</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Splits into train/val/test</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> data_dict</span></code></pre></div>
+<h4 id="model-building">3. Model Building</h4>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_tarnet(input_dim):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Shared representation network</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Two outcome heads (y0, y1)</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> model</span></code></pre></div>
+<h4 id="causal-effect-estimation">4. Causal Effect Estimation</h4>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_causal_effects(y0_pred, y1_pred):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ITE = y1 - y0</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ATE = mean(ITE)</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># CATE = ATE by subgroups</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> results_dict</span></code></pre></div>
+<h4 id="counterfactual-generation">5. Counterfactual Generation</h4>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_counterfactual_scenarios(model, X, T, Y):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Predicts both potential outcomes</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Creates counterfactual trajectories</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> counterfactual_df</span></code></pre></div>
+<h3 id="data-flow">Data Flow</h3>
+<pre><code>Raw Data → Preprocessing → TARNet Training → Predictions
+                                    ↓
+                          Causal Effect Computation
+                                    ↓
+                    ITE, ATE, CATE, Counterfactuals</code></pre>
+<hr />
+<h2 id="conclusion">Conclusion</h2>
+<p>This project successfully demonstrates:</p>
+<ol type="1">
+<li>✅ <strong>Transition from SVAR to Causal ML:</strong>
+<ul>
+<li>More flexible modeling approach</li>
+<li>Better handling of nonlinear relationships</li>
+</ul></li>
+<li>✅ <strong>Practical Policy Insights:</strong>
+<ul>
+<li>Quantifies policy effects</li>
+<li>Identifies heterogeneous impacts</li>
+<li>Enables counterfactual analysis</li>
+</ul></li>
+<li>✅ <strong>Reproducible Methodology:</strong>
+<ul>
+<li>Clear data pipeline</li>
+<li>Well-documented code</li>
+<li>Export-ready data formats</li>
+</ul></li>
+</ol>
+<h3 id="future-directions">Future Directions</h3>
+<ol type="1">
+<li><strong>Real Data Integration:</strong>
+<ul>
+<li>Replace synthetic data with actual housing/macro data</li>
+<li>Validate findings on real-world policy changes</li>
+</ul></li>
+<li><strong>Extended Policies:</strong>
+<ul>
+<li>Analyze other macroprudential tools (DSTI, capital
+requirements)</li>
+<li>Compare policy effectiveness</li>
+</ul></li>
+<li><strong>Robustness Checks:</strong>
+<ul>
+<li>Sensitivity analysis</li>
+<li>Placebo tests</li>
+<li>Comparison with alternative methods</li>
+</ul></li>
+<li><strong>Production Deployment:</strong>
+<ul>
+<li>API for real-time counterfactual predictions</li>
+<li>Dashboard for policymakers</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="appendix-how-to-use-with-real-data">Appendix: How to Use with
+Real Data</h2>
+<h3 id="step-1-prepare-your-data">Step 1: Prepare Your Data</h3>
+<p>Your CSV files should have: - <strong>8 feature columns</strong> (as
+in <code>feature_names.csv</code>) - <strong>Binary treatment
+column</strong> (0 = control, 1 = treated) - <strong>Outcome
+column</strong> (housing price change)</p>
+<h3 id="step-2-load-data">Step 2: Load Data</h3>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load your data</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">&#39;your_housing_data.csv&#39;</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Define feature columns (must match structure)</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>feature_cols <span class="op">=</span> [</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;gdp_growth&#39;</span>, <span class="st">&#39;credit_gap&#39;</span>, <span class="st">&#39;inflation&#39;</span>, <span class="st">&#39;interest_rate&#39;</span>,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;exchange_rate&#39;</span>, <span class="st">&#39;household_debt_income&#39;</span>, <span class="st">&#39;unemployment&#39;</span>, </span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;lag_housing_price&#39;</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract features, treatment, outcome</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[feature_cols].values</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> df[<span class="st">&#39;treatment&#39;</span>].values</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> df[<span class="st">&#39;outcome&#39;</span>].values</span></code></pre></div>
+<h3 id="step-3-preprocess">Step 3: Preprocess</h3>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize features (CRITICAL!)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> scaler.fit_transform(X)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data (maintain treatment stratification)</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, T_train, T_test, Y_train, Y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    X_scaled, T, Y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>T</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<h3 id="step-4-train-tarnet">Step 4: Train TARNet</h3>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build model</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>tarnet <span class="op">=</span> build_tarnet(input_dim<span class="op">=</span>X_train.shape[<span class="dv">1</span>])</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>tarnet.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">&#39;adam&#39;</span>, loss<span class="op">=</span><span class="st">&#39;mse&#39;</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare training data (mask outcomes)</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>train_y <span class="op">=</span> {</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;y0&#39;</span>: Y_train <span class="op">*</span> (T_train <span class="op">==</span> <span class="dv">0</span>),</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;y1&#39;</span>: Y_train <span class="op">*</span> (T_train <span class="op">==</span> <span class="dv">1</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Train</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> tarnet.fit(X_train, train_y, epochs<span class="op">=</span><span class="dv">100</span>, batch_size<span class="op">=</span><span class="dv">32</span>)</span></code></pre></div>
+<h3 id="step-5-estimate-causal-effects">Step 5: Estimate Causal
+Effects</h3>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict potential outcomes</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>y0_pred, y1_pred <span class="op">=</span> predict_counterfactuals(tarnet, X_test)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute effects</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>causal_results <span class="op">=</span> compute_causal_effects(y0_pred, y1_pred)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;ATE: </span><span class="sc">{</span>causal_results[<span class="st">&#39;ATE&#39;</span>]<span class="sc">:.4f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;95% CI: </span><span class="sc">{</span>causal_results[<span class="st">&#39;ATE_95CI&#39;</span>]<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<h3 id="step-6-interpret-results">Step 6: Interpret Results</h3>
+<ol type="1">
+<li><strong>ATE Interpretation:</strong>
+<ul>
+<li>Sign: Direction of policy effect</li>
+<li>Magnitude: Strength of effect</li>
+<li>CI: Statistical significance</li>
+</ul></li>
+<li><strong>CATE Analysis:</strong>
+<ul>
+<li>Compare effects across subgroups</li>
+<li>Identify conditions where policy is most/least effective</li>
+</ul></li>
+<li><strong>Counterfactuals:</strong>
+<ul>
+<li>Compare actual vs. predicted outcomes</li>
+<li>Assess policy impact over time</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="glossary">Glossary</h2>
+<ul>
+<li><strong>ATE (Average Treatment Effect):</strong> Average causal
+effect across population</li>
+<li><strong>ITE (Individual Treatment Effect):</strong> Causal effect
+for a specific unit</li>
+<li><strong>CATE (Conditional ATE):</strong> Average effect conditional
+on characteristics</li>
+<li><strong>Counterfactual:</strong> What would have happened under
+alternative treatment</li>
+<li><strong>Potential Outcomes:</strong> <span
+class="math inline"><em>Y</em>(0)</span> and <span
+class="math inline"><em>Y</em>(1)</span> - outcomes under control and
+treatment</li>
+<li><strong>TARNet:</strong> Treatment-Agnostic Representation
+Network</li>
+<li><strong>LTV:</strong> Loan-to-Value ratio</li>
+<li><strong>Unconfoundedness:</strong> Treatment assignment independent
+of potential outcomes given covariates</li>
+<li><strong>Overlap:</strong> Every unit has positive probability of
+receiving either treatment</li>
+</ul>
+<hr />
+<h2 id="references">References</h2>
+<h3 id="key-papers">Key Papers</h3>
+<ol type="1">
+<li><p>Shalit, U., Johansson, F. D., &amp; Sontag, D. (2017).
+“Estimating individual treatment effect: generalization bounds and
+algorithms.” ICML.</p></li>
+<li><p>Johansson, F., Shalit, U., &amp; Sontag, D. (2016). “Learning
+representations for counterfactual inference.” ICML.</p></li>
+<li><p>Pearl, J. (2009). “Causality: Models, Reasoning and Inference.”
+Cambridge University Press.</p></li>
+</ol>
+<h3 id="technical-documentation">Technical Documentation</h3>
+<ul>
+<li>TensorFlow/Keras: https://www.tensorflow.org</li>
+<li>Scikit-learn: https://scikit-learn.org</li>
+<li>Causal Inference: https://www.stats.ox.ac.uk/~doucet/courses/</li>
+</ul>
+<hr />
+<h2 id="contact-and-support">Contact and Support</h2>
+<p>For questions about this implementation: - Review the notebook:
+<code>[2]TARNET-example.ipynb</code> - Check exported data:
+<code>data_exports/</code> directory - Refer to README.md in
+data_exports for data structure details</p>
+<hr />
+<p><strong>End of Documentation</strong></p>
+<p><em>Generated for: TARNet Housing Price Policy Analysis
+Project</em></p>
+</body>
+</html>

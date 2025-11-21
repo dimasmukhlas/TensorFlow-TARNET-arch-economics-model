@@ -1,0 +1,9 @@
+feature_name,feature_index
+gdp_growth,0
+credit_gap,1
+inflation,2
+interest_rate,3
+exchange_rate,4
+household_debt_income,5
+unemployment,6
+lag_housing_price,7
